@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'dotenv'
 Dotenv.load
 
-describe Snapshotar::S3Storage do
+describe Snapshotar::Storage::S3Storage do
 
   context "setup s3 connection" do
 
