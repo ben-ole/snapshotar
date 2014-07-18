@@ -2,7 +2,20 @@ require "snapshotar/version"
 
 module Snapshotar
 
-  def self.ipsum
-    "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  class S3Storage
+
+    def initialize
+      @s3 = AWS::S3.new(
+        :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+        :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'])
+
+      @bucket = s3.buckets[ENV['AWS_SNAPSHOTAR_BUCKET']]
+    end
+
+    def list
+
+    end
+
   end
+
 end
