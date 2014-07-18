@@ -1,6 +1,6 @@
 # Snapshotar
 
-TODO: Write a gem description
+Make a snapshot of your rails database by serializing all objects.
 
 ## Installation
 
