@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "dotenv"
 
   spec.add_dependency 'aws-sdk', '~> 1.0'
+  spec.add_dependency 'jbuilder'
 end

@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'dotenv'
-Dotenv.load
 
 describe Snapshotar::Storage::S3Storage do
 
@@ -22,7 +20,7 @@ describe Snapshotar::Storage::S3Storage do
     end
 
     it "should create an element" do
-      @s3Storage.create("zz_testdump.json",{test: "this is a test object"}.to_json)
+      @s3Storage.create("zz_testdump.json",{"test" => "this is a test object"}.to_json)
 
       JSON.load(@s3Storage.show(@s3Storage.index.last)).should have_key("test")
 
