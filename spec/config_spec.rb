@@ -11,10 +11,10 @@ describe Snapshotar::Core do
     end
 
     it "should load default config" do
-      Snapshotar.configuration.should_not be_nil
+      expect(Snapshotar.configuration).not_to be_nil
 
-      Snapshotar.configuration.storage_type.should be :s3
-      Snapshotar.configuration.serialize.should_not be_nil
+      expect(Snapshotar.configuration.storage_type).to eq :s3
+      expect(Snapshotar.configuration.serialize).to be_nil
     end
 
   end
