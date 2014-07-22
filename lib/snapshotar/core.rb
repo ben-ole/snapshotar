@@ -16,10 +16,9 @@ module Snapshotar
     def export
       filename = "snapshotar_dump_#{Time.now.to_i}.json"
 
-      #TODO: call json builder in Snapshotar.config
+      serialized = Jbuilder.encode{|json| Snapshotar.configuration.serialize.call(json)}
 
-
-      @storage.create(filename,serialize_tree({"test" => "this is a test object"}))
+      @storage.create(filename,serialized)
 
       return filename
     end
@@ -33,11 +32,12 @@ module Snapshotar
       end
     end
 
-    private
+    def delete(filename)
 
-    def serialize_tree(tree)
-      tree.to_json
+      @storage.delete(filename)
     end
+
+    private
 
     def deserialize_tree(serialized_tree)
       JSON.load(serialized_tree)

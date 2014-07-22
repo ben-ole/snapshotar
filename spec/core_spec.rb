@@ -10,10 +10,6 @@ describe Snapshotar::Core do
       # clear db
       Mongoid.purge!
 
-      # create sample data
-      Event.create({name: "Event 1", date: Date.new})
-      Event.create({name: "Event 2", date: Date.new})
-
       # setup configuration
       Snapshotar.configure do |config|
 
@@ -23,6 +19,11 @@ describe Snapshotar::Core do
           json.array! Event.all, :name, :date
         end
       end
+
+      # create sample data
+      Event.create({name: "Event 1", date: Date.new})
+      Event.create({name: "Event 2", date: Date.new})
+
 
       @snapshotar = described_class.new
     end
@@ -36,7 +37,16 @@ describe Snapshotar::Core do
     end
 
     it "should correctly read config models" do
-      p "seralize: #{Jbuilder.encode{|json| Snapshotar.configuration.serialize.call(json) }}"
+      expected_output = "[{\"name\":\"Event 1\",\"date\":\"-4712-01-01\"},{\"name\":\"Event 2\",\"date\":\"-4712-01-01\"}]"
+      expect(Jbuilder.encode{|json| Snapshotar.configuration.serialize.call(json)}).to eq expected_output
+    end
+
+    it "should export models" do
+      filename = @snapshotar.export
+      expect(@snapshotar.list).to include(filename)
+
+      # clean up
+      @snapshotar.delete(filename)
     end
   end
 end
