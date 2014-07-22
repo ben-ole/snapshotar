@@ -11,6 +11,7 @@ require 'mongoid'
 Mongoid.load!('spec/config/mongoid.yml')
 
 require 'models/event'
+require 'models/artist'
 
 RSpec.configure do |config|
   # some (optional) config here

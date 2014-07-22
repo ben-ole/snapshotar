@@ -16,7 +16,15 @@ module Snapshotar
     def export
       filename = "snapshotar_dump_#{Time.now.to_i}.json"
 
-      serialized = Jbuilder.encode{|json| Snapshotar.configuration.serialize.call(json)}
+      # serialized = Jbuilder.encode{|json| Snapshotar.configuration.serialize.call(json)}
+      serialized = Jbuilder.encode do |json|
+        Snapshotar.configuration.models.each do |m|
+          model_name = m.first.name
+          json.set! model_name do
+            json.array! m.first.all, *m[1..-1]
+          end
+        end
+      end
 
       @storage.create(filename,serialized)
 
@@ -24,11 +32,13 @@ module Snapshotar
     end
 
     def import(filename)
-      tree = deserialize_tree @storage.show(filename)
+      tree = JSON.load @storage.show(filename)
 
-      tree.flatten.each_with_index do |item,idx|
-        clazz = item["clazz"].constantize
-        clazz.create(item.except("clazz"))
+      tree.each do |key,value|
+        clazz = key.constantize
+        value.each do |itm|
+          clazz.create(itm)
+        end
       end
     end
 

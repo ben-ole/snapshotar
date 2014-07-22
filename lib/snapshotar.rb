@@ -19,10 +19,12 @@ module Snapshotar
   class Configuration
     attr_accessor :storage_type
     attr_accessor :serialize
+    attr_accessor :models
 
     def initialize
       @storage_type = :s3
       @serialize = nil
+      @models = []
     end
 
     def snapshot(&block)
