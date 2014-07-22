@@ -14,6 +14,7 @@ describe Snapshotar::Core do
       Snapshotar.configuration.should_not be_nil
 
       Snapshotar.configuration.storage_type.should be :s3
+      Snapshotar.configuration.models.should be_empty
     end
 
   end

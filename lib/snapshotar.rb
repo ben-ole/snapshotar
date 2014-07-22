@@ -18,9 +18,11 @@ module Snapshotar
 
   class Configuration
     attr_accessor :storage_type
+    attr_accessor :models
 
     def initialize
       @storage_type = :s3
+      @models = []
     end
 
   end
