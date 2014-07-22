@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'jbuilder'
 
 describe Snapshotar::Core do
 
@@ -18,7 +19,9 @@ describe Snapshotar::Core do
 
         config.storage_type = :s3
 
-        config.models = []
+        config.snapshot do |json|
+          json.array! Event.all, :name, :date
+        end
       end
 
       @snapshotar = described_class.new
@@ -30,6 +33,10 @@ describe Snapshotar::Core do
 
     it "should have one Event" do
       expect(Event.count).to eq 2
+    end
+
+    it "should correctly read config models" do
+      p "seralize: #{Jbuilder.encode{|json| Snapshotar.configuration.serialize.call(json) }}"
     end
   end
 end

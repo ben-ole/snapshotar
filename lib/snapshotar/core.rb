@@ -15,9 +15,11 @@ module Snapshotar
 
     def export
       filename = "snapshotar_dump_#{Time.now.to_i}.json"
-      @storage.create(filename,serialize_tree({"test" => "this is a test object"}))
 
       #TODO: call json builder in Snapshotar.config
+
+
+      @storage.create(filename,serialize_tree({"test" => "this is a test object"}))
 
       return filename
     end
