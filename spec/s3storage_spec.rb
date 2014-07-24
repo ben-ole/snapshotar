@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+#:nodoc:
 describe Snapshotar::Storage::S3Storage do
 
   context "setup s3 connection" do

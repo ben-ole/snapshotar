@@ -1,20 +1,34 @@
 require "snapshotar/storage/s3_storage"
 
 module Snapshotar
+
   class Core
 
-    def initialize
+    def initialize #:nodoc:
       storage_class = Snapshotar::Storage::S3Storage if Snapshotar.configuration.storage_type == :s3
 
       @storage = storage_class.new
     end
 
+    ##
+    # List all available snapshots.
+    #
+    # returns:: array of filenames
+    #
     def list
       @storage.index
     end
 
-    def export
-      filename = "snapshotar_dump_#{Time.now.to_i}.json"
+    ##
+    # Performs a snapshot
+    #
+    # Params::
+    #  +filename+:: filename to create or nil to let snapshotar create one
+    #
+    # returns:: +filename+
+    #
+    def export(filename = nil)
+      filename ||= "snapshotar_dump_#{Time.now.to_i}.json"
 
       # serialized = Jbuilder.encode{|json| Snapshotar.configuration.serialize.call(json)}
       serialized = Jbuilder.encode do |json|
@@ -31,6 +45,11 @@ module Snapshotar
       return filename
     end
 
+    # Load a snapshot.
+    #
+    # Params::
+    #  +filename+:: name of the snapshot to load
+    #
     def import(filename)
       tree = JSON.load @storage.show(filename)
 
@@ -42,15 +61,15 @@ module Snapshotar
       end
     end
 
+    ##
+    # delete a snapshot.
+    #
+    # Params::
+    #  +filename+:: name of the snapshot to delete
+    #
     def delete(filename)
 
       @storage.delete(filename)
-    end
-
-    private
-
-    def deserialize_tree(serialized_tree)
-      JSON.load(serialized_tree)
     end
 
   end

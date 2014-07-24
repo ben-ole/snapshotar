@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'jbuilder'
 
+#:nodoc:
 describe Snapshotar::Core do
 
   context "listing snapshots" do

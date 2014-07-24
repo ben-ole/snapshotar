@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+#:nodoc:
 describe Snapshotar::Core do
 
   context "listing snapshots" do
