@@ -40,6 +40,11 @@ others fill up your app with sample data.
 - For testing and development!!
 - definitely *NOT* for production backups
 
+## Requirements
+
+- Ruby >= 1.9.2
+- Rails ?
+
 ## Usage
 
 - one option for snapshotar is **rake**
