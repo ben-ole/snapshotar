@@ -1,4 +1,5 @@
 require "snapshotar/storage/s3_storage"
+require "snapshotar/storage/file_storage"
 
 module Snapshotar
 

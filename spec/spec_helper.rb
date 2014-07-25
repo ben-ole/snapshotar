@@ -4,8 +4,7 @@ Bundler.setup
 require 'dotenv'
 Dotenv.load
 
-require 'snapshotar' # and any other gems you need
-
+require 'snapshotar'
 require 'mongoid'
 
 Mongoid.load!('spec/config/mongoid.yml')
@@ -14,5 +13,6 @@ require 'models/event'
 require 'models/artist'
 
 RSpec.configure do |config|
-  # some (optional) config here
+  
+  config.tty = true
 end
