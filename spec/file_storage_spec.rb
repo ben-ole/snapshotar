@@ -2,17 +2,12 @@ require 'spec_helper'
 
 describe Snapshotar::Storage::FileStorage do
 
-  TMP_DIR = "./tmp"
+  TMP_DIR = "tmp"
 
   context "local file storage" do
 
     before(:all) do
-      @fileStorage = described_class.new
-
-      # create tmp dir if it's not existent
-      unless File.directory?(TMP_DIR)
-        FileUtils.mkdir_p(TMP_DIR)
-      end
+      @fileStorage = described_class.new(TMP_DIR)
 
       # write a test file
       f = File.open(File.join(TMP_DIR,"test.json"), "w+")

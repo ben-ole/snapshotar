@@ -45,7 +45,7 @@ others fill up your app with sample data.
 
 ## Requirements
 
-- Ruby >= 1.9.2
+- Ruby >= 1.9.3
 - Rails ?
 
 ## Usage

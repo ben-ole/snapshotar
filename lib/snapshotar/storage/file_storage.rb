@@ -5,12 +5,17 @@ module Snapshotar
 
       ##
       # Use this property to specify the local path where snapshots are stored.
-      # Default:: +./tmp/+
+      # Default:: +tmp/+
       #
       attr_accessor :base_path
 
-      def initialize #:nodoc:
-        @base_path = "tmp"
+      def initialize(path = nil) #:nodoc:
+        @base_path = path || "tmp"
+
+        # create tmp dir if it's not existent
+        unless File.directory?(@base_path)
+          FileUtils.mkdir_p(@base_path)
+        end
       end
 
       ##
