@@ -10,7 +10,7 @@ module Snapshotar
       attr_accessor :base_path
 
       def initialize #:nodoc:
-        @base_path = "./tmp"
+        @base_path = "tmp"
       end
 
       ##
