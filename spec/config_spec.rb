@@ -15,7 +15,7 @@ describe Snapshotar::Core do
       expect(Snapshotar.configuration).not_to be_nil
 
       expect(Snapshotar.configuration.storage_type).to eq :s3
-      expect(Snapshotar.configuration.serialize).to be_nil
+      expect(Snapshotar.configuration.models).to be_empty
     end
 
   end

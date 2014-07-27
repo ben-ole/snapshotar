@@ -3,7 +3,7 @@ require 'spec_helper'
 #:nodoc:
 describe Snapshotar::Storage::S3Storage do
 
-  context "setup s3 connection" do
+  context "setup s3 connection", require_s3: true do
 
     before(:all) do
       @s3Storage = described_class.new

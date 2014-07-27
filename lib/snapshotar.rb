@@ -50,10 +50,6 @@ module Snapshotar
       @storage_type = :s3
       @models = []
     end
-
-    def snapshot(&block) #:nodoc:
-      @serialize = block
-    end
   end
 
 end

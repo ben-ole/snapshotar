@@ -7,6 +7,7 @@ module Snapshotar
 
     def initialize #:nodoc:
       storage_class = Snapshotar::Storage::S3Storage if Snapshotar.configuration.storage_type == :s3
+      storage_class = Snapshotar::Storage::FileStorage if Snapshotar.configuration.storage_type == :file
 
       @storage = storage_class.new
     end

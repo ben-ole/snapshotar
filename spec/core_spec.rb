@@ -14,14 +14,9 @@ describe Snapshotar::Core do
       # setup configuration
       Snapshotar.configure do |config|
 
-        config.storage_type = :s3
+        config.storage_type = :file
 
-        # custom serialization
-        config.snapshot do |json|
-          json.array! Event.all, :name, :date
-        end
-
-        # auto serialization
+        # serialization
         config.models << [Event, :name, :date]
         config.models << [Artist, :name]
 
@@ -37,8 +32,8 @@ describe Snapshotar::Core do
       @snapshotar = described_class.new
     end
 
-    it "should list snapshots with s3" do
-      expect(@snapshotar.list).not_to be_empty
+    it "should list snapshots" do
+      expect(@snapshotar.list).to be_empty
     end
 
     it "should have one Event" do
