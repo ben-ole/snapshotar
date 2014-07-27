@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'json'
 
 describe Snapshotar::Storage::FileStorage do
 
