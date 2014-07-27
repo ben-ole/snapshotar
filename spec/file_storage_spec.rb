@@ -40,7 +40,7 @@ describe Snapshotar::Storage::FileStorage do
 
       @fileStorage.create("zz_testdump.json",{"test" => "this is a test object"}.to_json)
 
-      expect(JSON.load(@fileStorage.show(@fileStorage.index.last))).to have_key("test")
+      expect(JSON.load(@fileStorage.show("zz_testdump.json"))).to have_key("test")
 
       @fileStorage.delete("zz_testdump.json")
     end

@@ -57,6 +57,20 @@ users create snapshots.
 
 ## Configuration Options
 
+## Testing
+This repository is under continuous integration testing on travis-ci.org.
+
+Amazon S3 related functionalities are not tested in CI as an official account at
+amazon would be required. AWS S3 tests can be run locally by providing a *.env* file
+in the projects root directory with the following keys:
+
+    AWS_ACCESS_KEY_ID=<your id>
+    AWS_SECRET_ACCESS_KEY=<your secret>
+    AWS_SNAPSHOTAR_BUCKET=<a bucket name>
+
+    RACK_ENV=test
+
+    S3_ENABLED=true
 
 ## Contributing
 
