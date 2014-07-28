@@ -39,7 +39,16 @@ module Snapshotar
         Snapshotar.configuration.models.each do |m|
           model_name = m.first.name
           json.set! model_name do
-            json.array! m.first.all, *m[1..-1]
+            json.array! m.first.all do |itm|
+              m[1..-1].each do |attr|
+                # replace uploads by their url
+                if itm.send(attr.to_sym).respond_to?(:url)
+                  json.set! "#{attr}_url".to_sym, itm.send(attr.to_sym).path
+                else
+                  json.set! attr.to_sym, itm[attr]
+                end
+              end
+            end
           end
         end
       end
@@ -59,8 +68,19 @@ module Snapshotar
 
       tree.each do |key,value|
         clazz = key.constantize
+
         value.each do |itm|
-          clazz.create(itm)
+          item_params = {}
+          itm.each do |itm_key,itm_value|
+            # handle url paths separatley
+            if itm_key.to_s.end_with?("_url")
+              orig_key = itm_key.to_s[0..-5].to_sym
+              item_params[orig_key] = File.open(itm_value)
+            else
+              item_params[itm_key] = itm_value
+            end
+          end
+          clazz.create(item_params)
         end
       end
     end

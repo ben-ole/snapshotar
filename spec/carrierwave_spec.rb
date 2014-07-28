@@ -54,11 +54,11 @@ describe Snapshotar::Storage::FileStorage do
 
       expect(Artist.count).to eq 0
 
-      # reimport
+      # # reimport
       @snapshotar.import(filename)
 
       expect(Artist.count).to eq 1
-      p Artist.first.avatar
+      expect(Artist.first.avatar.path).not_to be_nil
 
       # clean up
       @snapshotar.delete(filename)
