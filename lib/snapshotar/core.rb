@@ -1,5 +1,7 @@
 require "snapshotar/storage/s3_storage"
 require "snapshotar/storage/file_storage"
+require "json"
+require "jbuilder"
 
 module Snapshotar
 
@@ -25,14 +27,14 @@ module Snapshotar
     # Performs a snapshot
     #
     # Params::
-    #  +filename+:: filename to create or nil to let snapshotar create one
+    #  +filename+:: filename to create or nil to let snapshotar create something
+    # like +snapshotar_dump_<timestamp>.json+
     #
     # returns:: +filename+
     #
     def export(filename = nil)
       filename ||= "snapshotar_dump_#{Time.now.to_i}.json"
 
-      # serialized = Jbuilder.encode{|json| Snapshotar.configuration.serialize.call(json)}
       serialized = Jbuilder.encode do |json|
         Snapshotar.configuration.models.each do |m|
           model_name = m.first.name

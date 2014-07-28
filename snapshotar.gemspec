@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "dotenv"
   spec.add_development_dependency 'mongoid', '~> 4.0.0'
+  spec.add_development_dependency 'carrierwave-mongoid'
 
   spec.add_dependency 'aws-sdk', '~> 1.0'
   spec.add_dependency 'jbuilder'

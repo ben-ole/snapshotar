@@ -32,6 +32,12 @@ describe Snapshotar::Core do
       @snapshotar = described_class.new
     end
 
+    after(:all) do
+      # clean up
+      FileUtils.rm_rf(Dir["tmp"])
+      Mongoid.purge!
+    end
+
     it "should list snapshots" do
       expect(@snapshotar.list).to be_empty
     end

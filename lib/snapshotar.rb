@@ -13,7 +13,7 @@ module Snapshotar
     # config/initializers and add your configuation inside:
     #
     #    Snapshotar.configure do |config|
-    #      config.storage_type = :s3
+    #      config.storage_type = :file # :s3
     #
     #      config.models << [Event, :name, :date]
     #      config.models << [Artist, :name]
@@ -47,7 +47,7 @@ module Snapshotar
     attr_accessor :models
 
     def initialize #:nodoc:
-      @storage_type = :s3
+      @storage_type = :file
       @models = []
     end
   end
