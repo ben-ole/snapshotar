@@ -1,6 +1,8 @@
 require "snapshotar/version"
 require "snapshotar/core"
 
+require "snapshotar/railtie" if defined?(Rails)
+
 ##
 # Make a snapshot of your staging environment and pull back on your dev machine.
 
