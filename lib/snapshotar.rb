@@ -1,7 +1,7 @@
+require "snapshotar/configuration"
 require "snapshotar/version"
 require "snapshotar/core"
-
-require "snapshotar/railtie" if defined?(Rails)
+require "snapshotar/tasks"
 
 ##
 # Make a snapshot of your staging environment and pull back on your dev machine.
@@ -21,7 +21,6 @@ module Snapshotar
     #      config.models << [Artist, :name]
     #    end
     attr_accessor :configuration
-
   end
 
   def self.configuration
@@ -32,26 +31,35 @@ module Snapshotar
     yield(configuration) if block_given?
   end
 
-  ##
-  # Configuration Class
-  class Configuration
-
-    ##
-    # Where to store your snapshots?
-    # - +:s3+ for amazon s3 service
-    # - +:file+ local directory
-    attr_accessor :storage_type
-
-    ##
-    # Provide the models and their attributes to seralize like this:
-    #    [[ModelName1, :attribute1, :attribute2,...],[ModelName2, :attribute1]]
-    #
-    attr_accessor :models
-
-    def initialize #:nodoc:
-      @storage_type = :file
-      @models = []
-    end
+  def self.core
+    @core ||= Core.new
   end
 
+  ##
+  # List available snapshots
+  #
+  def self.list
+    self.core.list
+  end
+
+  ##
+  # Create a snapshot
+  #
+  def self.create(name = nil)
+    self.core.export(name)
+  end
+
+  ##
+  # Load a snapshot
+  #
+  def self.load(name)
+    self.core.import(name)
+  end
+
+  ##
+  # Delete a snapshot
+  #
+  def self.delete(name)
+    self.core.delete(name)
+  end
 end

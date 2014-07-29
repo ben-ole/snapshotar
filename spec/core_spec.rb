@@ -28,8 +28,6 @@ describe Snapshotar::Core do
 
       Artist.create({name: "Artist 1"})
       Artist.create({name: "Artist 2"})
-
-      @snapshotar = described_class.new
     end
 
     after(:all) do
@@ -39,7 +37,7 @@ describe Snapshotar::Core do
     end
 
     it "should list snapshots" do
-      expect(@snapshotar.list).to be_empty
+      expect(Snapshotar.list).to be_empty
     end
 
     it "should have one Event" do
@@ -62,16 +60,16 @@ describe Snapshotar::Core do
     end
 
     it "should export models" do
-      filename = @snapshotar.export
-      expect(@snapshotar.list).to include(filename)
+      filename = Snapshotar.create
+      expect(Snapshotar.list).to include(filename)
 
       # clean up
-      @snapshotar.delete(filename)
+      Snapshotar.delete(filename)
     end
 
     it "should import models" do
       # export sample
-      filename = @snapshotar.export
+      filename = Snapshotar.create
 
       # clear db
       Mongoid.purge!
@@ -80,13 +78,13 @@ describe Snapshotar::Core do
       expect(Artist.count).to eq 0
 
       # reimport
-      @snapshotar.import(filename)
+      Snapshotar.load(filename)
 
       expect(Event.count).to eq 2
       expect(Artist.count).to eq 2
 
       # clean up
-      @snapshotar.delete(filename)
+      Snapshotar.delete(filename)
     end
   end
 end
