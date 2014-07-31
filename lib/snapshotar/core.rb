@@ -41,9 +41,12 @@ module Snapshotar
           json.set! model_name do
             json.array! m.first.all do |itm|
               m[1..-1].each do |attr|
+
+                next unless itm.respond_to?(attr.to_sym)
+
                 # replace uploads by their url
                 if itm.send(attr.to_sym).respond_to?(:url)
-                  json.set! "#{attr}_url".to_sym, itm.send(attr.to_sym).path
+                  json.set! "#{attr}_url".to_sym, itm.send(attr.to_sym).url
                 else
                   json.set! attr.to_sym, itm[attr]
                 end
