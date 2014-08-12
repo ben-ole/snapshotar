@@ -48,6 +48,8 @@ module Snapshotar
                 # replace uploads by their url
                 if itm.send(attr.to_sym).respond_to?(:url)
                   json.set! "#{attr}_url".to_sym, itm.send(attr.to_sym).url
+                elsif attr.to_s == "id"
+                  json.set! :id, itm[attr].to_s
                 else
                   json.set! attr.to_sym, itm[attr]
                 end
@@ -88,7 +90,7 @@ module Snapshotar
             end
           end
           p "params: #{item_params}"
-          clazz.create(item_params)
+          clazz.new(item_params).save(validate: false)
         end
       end
     end
