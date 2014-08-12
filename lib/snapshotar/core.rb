@@ -43,6 +43,7 @@ module Snapshotar
               m[1..-1].each do |attr|
 
                 next unless itm.respond_to?(attr.to_sym)
+                next if itm[attr].nil?
 
                 # replace uploads by their url
                 if itm.send(attr.to_sym).respond_to?(:url)
@@ -75,14 +76,18 @@ module Snapshotar
         value.each do |itm|
           item_params = {}
           itm.each do |itm_key,itm_value|
+
+            next if itm_value.nil?
+
             # handle url paths separatley
             if itm_key.to_s.end_with?("_url")
-              orig_key = itm_key.to_s[0..-5].to_sym
-              item_params[orig_key] = File.open(itm_value)
+              orig_key = "remote_#{itm_key}"#.to_s[0..-5].to_sym
+              item_params[orig_key] = itm_value#File.open(itm_value)
             else
               item_params[itm_key] = itm_value
             end
           end
+          p "params: #{item_params}"
           clazz.create(item_params)
         end
       end
