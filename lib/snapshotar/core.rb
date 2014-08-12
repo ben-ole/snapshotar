@@ -48,8 +48,8 @@ module Snapshotar
                 # replace uploads by their url
                 if itm.send(attr.to_sym).respond_to?(:url)
                   json.set! "#{attr}_url".to_sym, itm.send(attr.to_sym).url
-                elsif attr.to_s == "id"
-                  json.set! :id, itm[attr].to_s
+                elsif itm.send(attr.to_sym).is_a? ::BSON::ObjectId
+                  json.set! attr.to_sym, itm[attr].to_s
                 else
                   json.set! attr.to_sym, itm[attr]
                 end
