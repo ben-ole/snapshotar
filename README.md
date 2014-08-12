@@ -1,8 +1,6 @@
 [![Build Status](https://travis-ci.org/elchbenny/snapshotar.svg?branch=master)](https://travis-ci.org/elchbenny/snapshotar)
 [![Code Climate](https://codeclimate.com/github/elchbenny/snapshotar.png)](https://codeclimate.com/github/elchbenny/snapshotar)
 
-**Gem is still under development.**
-*Hence, this documentation is preliminary!*
 
 # Snapshotar
 
@@ -25,7 +23,7 @@ Or install it yourself as:
 ## What snapshotar can...
 
 1. serializing your rails models to json
-2. handling carrierwave/paperclip attachments
+2. handling *carrierwave* attachments
 3. storing serialized dataset locally or to amazon s3
 4. listing available snapshots
 5. deserialize snapshot and load back to database
