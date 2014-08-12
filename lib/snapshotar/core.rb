@@ -83,13 +83,16 @@ module Snapshotar
 
             # handle url paths separatley
             if itm_key.to_s.end_with?("_url")
-              orig_key = "remote_#{itm_key}"#.to_s[0..-5].to_sym
-              item_params[orig_key] = itm_value#File.open(itm_value)
+              if File.exist?(itm_value)
+                orig_key = itm_key.to_s[0..-5].to_sym
+                item_params[orig_key] = File.open(itm_value)
+              else  # remote
+                item_params["remote_#{itm_key}"] = itm_value
+              end
             else
               item_params[itm_key] = itm_value
             end
           end
-          p "params: #{item_params}"
           clazz.new(item_params).save(validate: false)
         end
       end
