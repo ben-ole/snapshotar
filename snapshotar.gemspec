@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.name          = "snapshotar"
   spec.version       = Snapshotar::VERSION
   spec.authors       = ["Benjamin Müller"]
-  spec.email         = ["benjamin@boxar.de"]
-  spec.description   = %q{Make a snapshot of your rails database by serializing all objects.}
+  spec.email         = ["benjamin@berlab.io"]
+  spec.description   = %q{Make a snapshot of your rails database.}
   spec.summary       = %q{In contrast to a database backup, snapshotAR is able to manage image references made with paperclip or carrierwave correctly. You are able to save your entire application or only parts of it and e.g. seed your test environments. }
   spec.homepage      = ""
   spec.license       = "MIT"
