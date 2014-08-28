@@ -55,10 +55,10 @@ instead of...
 
 ### rake
 
-    rake snapshotar:create                    # create a snapshots
-    rake snapshotar:delete                    # delete a snapshots
+    rake snapshotar:create                    # create snapshots
+    rake snapshotar:delete                    # delete snapshots
     rake snapshotar:list                      # list available snapshots
-    rake snapshotar:load                      # load a snapshots
+    rake snapshotar:load                      # load snapshots
 
 ### controller action
 
