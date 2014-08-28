@@ -20,6 +20,12 @@ Or install it yourself as:
 
     $ gem install snapshotar
 
+Run install generator:
+
+    $ rails generate snapshotar:install
+
+Lookup *config/initializers/snapshotar.rb* and configure snapshotar.
+
 ## What snapshotar can...
 
 1. serializing your rails models to json
@@ -33,8 +39,7 @@ Or install it yourself as:
 instead of...
 
 - **database backup?** Because image attachments causing trouble!!
-- **fixtures/factories/fakers?** Because this requires coding. Let the
-others fill up your app with sample data.
+- **fixtures/factories/fakers?** Because this requires coding. Don't spend time coding test data - it's boring.
 
 ## When to use snapshotar?
 
@@ -44,16 +49,66 @@ others fill up your app with sample data.
 ## Requirements
 
 - Ruby >= 1.9.3
-- Rails ?
+- tested with *Mongoid*, but *ActiveRecord* should work as well.
 
 ## Usage
 
-- one option for snapshotar is **rake**
+### rake
 
-- you can also integrate snapshotar into your administration backend and let app
-users create snapshots.
+    rake snapshotar:create                    # create a snapshots
+    rake snapshotar:delete                    # delete a snapshots
+    rake snapshotar:list                      # list available snapshots
+    rake snapshotar:load                      # load a snapshots
+
+### controller action
+
+You can also integrate snapshotar into your administration backend and let app
+users create snapshots. A sample controller is provided below
+
+*app/controllers/admin/snapshots_controller.rb*
+
+    class Admin::SnapshotsController < Admin::AdminController
+
+      def index
+        @snapshots = Snapshotar.list
+      end
+
+      def load
+        Mongoid.purge!
+        Snapshotar.load(params[:name])
+        redirect_to admin_snapshots_path
+      end
+
+      def new
+      end
+
+      def create
+        Snapshotar.create
+        redirect_to admin_snapshots_path
+      end
+
+      def delete
+        Snapshotar.delete(params[:name])
+        redirect_to admin_snapshots_path
+      end
+    end
+
 
 ## Configuration Options
+
+For **AWS S3**, you have to provide the following ENV variables provisioning your S3 bucket. For development environments look at this wonderful dot-env gem https://github.com/bkeepers/dotenv.
+
+    config.storage_type = :s3
+
+    AWS_ACCESS_KEY_ID=<your id>
+    AWS_SECRET_ACCESS_KEY=<your secret>
+    AWS_SNAPSHOTAR_BUCKET=<a bucket name>
+
+**Files**
+
+    config.storage_type = :file
+
+Snapshots are stored in the rails *tmp/* directory
 
 ## Testing
 This repository is under continuous integration testing on travis-ci.org.
