@@ -40,10 +40,13 @@ module Snapshotar
           model_name = m.first.name
           json.set! model_name do
 
-            # support inherited classes
-            json.set! :klass, itm.class.to_s unless (itm.class.to_s == model_name)
-
+            # iterate objects
             json.array! m.first.all do |itm|
+
+              # support inherited classes
+              json.set! :clazz, itm.class.to_s unless (itm.class.to_s == model_name)
+
+              # iterate attributes
               m[1..-1].each do |attr|
 
                 next unless itm.respond_to?(attr.to_sym)
@@ -84,6 +87,8 @@ module Snapshotar
           itm.each do |itm_key,itm_value|
 
             next if itm_value.nil?
+
+            clazz = itm_value.constantize if (itm_key.to_s == "clazz")
 
             # handle url paths separatley
             if itm_key.to_s.end_with?("_url")
