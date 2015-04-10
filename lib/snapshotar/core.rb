@@ -39,6 +39,10 @@ module Snapshotar
         Snapshotar.configuration.models.each do |m|
           model_name = m.first.name
           json.set! model_name do
+
+            # support inherited classes
+            json.set! :klass, itm.class.to_s unless (itm.class.to_s == model_name)
+
             json.array! m.first.all do |itm|
               m[1..-1].each do |attr|
 
