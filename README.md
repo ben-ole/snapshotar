@@ -98,11 +98,24 @@ users create snapshots. A sample controller is provided below
 
 For **AWS S3**, you have to provide the following ENV variables provisioning your S3 bucket. For development environments look at this wonderful dot-env gem https://github.com/bkeepers/dotenv.
 
-    config.storage_type = :s3
+*config/initializers/snapshotar.rb*
+
+    Snapshotar.configure do |config|
+      config.storage_type = :s3
+
+      # serialization
+      config.models << [<ModelName>, <Attribute1 Symbol>, <Attribute2 Symbol>, :id, :name]
+
+      # shorter ...
+      config.models << ([User] + User.fields.keys.map { |x| x.to_sym })
+
+    end
+
 
     AWS_ACCESS_KEY_ID=<your id>
     AWS_SECRET_ACCESS_KEY=<your secret>
     AWS_SNAPSHOTAR_BUCKET=<a bucket name>
+    AWS_REGION=<e.g. eu-central-1>
 
 **Files**
 
@@ -120,6 +133,7 @@ in the projects root directory with the following keys:
     AWS_ACCESS_KEY_ID=<your id>
     AWS_SECRET_ACCESS_KEY=<your secret>
     AWS_SNAPSHOTAR_BUCKET=<a bucket name>
+    AWS_REGION=<e.g. eu-central-1>
 
     RACK_ENV=test
 

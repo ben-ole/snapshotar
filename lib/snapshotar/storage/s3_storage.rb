@@ -12,6 +12,7 @@ module Snapshotar
         raise ArgumentError, "You should set ENV['AWS_ACCESS_KEY_ID'] to a valid value" unless ENV['AWS_ACCESS_KEY_ID']
         raise ArgumentError, "You should set ENV['AWS_SECRET_ACCESS_KEY'] to a valid value" unless ENV['AWS_SECRET_ACCESS_KEY']
         raise ArgumentError, "You should set ENV['AWS_SNAPSHOTAR_BUCKET'] to a aws bucket name used only for snapshotting" unless ENV['AWS_SNAPSHOTAR_BUCKET']
+        raise ArgumentError, "You should set ENV['AWS_REGION'] to the region of your s3 bucket" unless ENV['AWS_REGION']
 
         p "Running S3 with key: #{ENV['AWS_ACCESS_KEY_ID']}, secret: #{ENV['AWS_SECRET_ACCESS_KEY']}, bucket: #{ENV['AWS_SNAPSHOTAR_BUCKET']}"
 
