@@ -37,14 +37,14 @@ module Snapshotar
 
       serialized = Jbuilder.encode do |json|
         Snapshotar.configuration.models.each do |m|
-          model_name = m.first.name
-          json.set! model_name do
+          model = m.first
+          json.set! model.name do
 
             # iterate objects
-            json.array! m.first.all do |itm|
+            json.array! model.unscoped.all do |itm|
 
               # support inherited classes
-              json.set! :clazz, itm.class.to_s unless (itm.class.to_s == model_name)
+              json.set! :clazz, itm.class.to_s unless (itm.class.to_s == model.name)
 
               # iterate attributes
               m[1..-1].each do |attr|

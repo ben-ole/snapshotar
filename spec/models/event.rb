@@ -5,4 +5,7 @@ class Event #:nodoc:
 
    field :name, type: String
    field :date, type: Date
+   field :published, type: Mongoid::Boolean, default: false
+
+   default_scope ->{ where(published: true) }
 end
