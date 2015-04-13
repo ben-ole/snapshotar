@@ -18,7 +18,7 @@ end
 
 require 'models/event'
 require 'models/artist'
-
+require 'models/band'
 
 RSpec.configure do |config|
 

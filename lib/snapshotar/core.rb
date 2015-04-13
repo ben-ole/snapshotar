@@ -88,7 +88,11 @@ module Snapshotar
 
             next if itm_value.nil?
 
-            clazz = itm_value.constantize if (itm_key.to_s == "clazz")
+            # handle inheritance
+            if (itm_key.to_s == "clazz")
+              clazz = itm_value.constantize
+              next
+            end
 
             # handle url paths separatley
             if itm_key.to_s.end_with?("_url")
