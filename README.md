@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/elchbenny/snapshotar.svg?branch=master)](https://travis-ci.org/elchbenny/snapshotar)
-[![Code Climate](https://codeclimate.com/github/elchbenny/snapshotar.png)](https://codeclimate.com/github/elchbenny/snapshotar)
+[![Build Status](https://travis-ci.org/ben-ole/snapshotar.svg?branch=master)](https://travis-ci.org/ben-ole/snapshotar)
+[![Code Climate](https://codeclimate.com/github/elchbenny/snapshotar.png)](https://codeclimate.com/github/ben-ole/snapshotar)
 [![Gem Version](https://badge.fury.io/rb/snapshotar.svg)](http://badge.fury.io/rb/snapshotar)
 
 # Snapshotar
