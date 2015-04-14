@@ -96,8 +96,6 @@ users create snapshots. A sample controller is provided below
 
 ## Configuration Options
 
-For **AWS S3**, you have to provide the following ENV variables provisioning your S3 bucket. For development environments look at this wonderful dot-env gem https://github.com/bkeepers/dotenv.
-
 *config/initializers/snapshotar.rb*
 
     Snapshotar.configure do |config|
@@ -111,11 +109,12 @@ For **AWS S3**, you have to provide the following ENV variables provisioning you
 
     end
 
+For **AWS S3**, you have to provide the following ENV variables provisioning your S3 bucket. For development environments look at this wonderful dot-env gem https://github.com/bkeepers/dotenv.
 
-    AWS_ACCESS_KEY_ID=<your id>
-    AWS_SECRET_ACCESS_KEY=<your secret>
-    AWS_SNAPSHOTAR_BUCKET=<a bucket name>
-    AWS_REGION=<e.g. eu-central-1>
+    AWS_ACCESS_KEY_ID: <your id>
+    AWS_SECRET_ACCESS_KEY: <your secret>
+    AWS_SNAPSHOTAR_BUCKET: <a bucket name>
+    AWS_REGION: <e.g. eu-central-1>
 
 **Files**
 
@@ -130,14 +129,14 @@ Amazon S3 related functionalities are not tested in CI as an official account at
 amazon would be required. AWS S3 tests can be run locally by providing a *.env* file
 in the projects root directory with the following keys:
 
-    AWS_ACCESS_KEY_ID=<your id>
-    AWS_SECRET_ACCESS_KEY=<your secret>
-    AWS_SNAPSHOTAR_BUCKET=<a bucket name>
-    AWS_REGION=<e.g. eu-central-1>
+    AWS_ACCESS_KEY_ID: <your id>
+    AWS_SECRET_ACCESS_KEY: <your secret>
+    AWS_SNAPSHOTAR_BUCKET: <a bucket name>
+    AWS_REGION: <e.g. eu-central-1>
 
-    RACK_ENV=test
+    RACK_ENV: test
 
-    S3_ENABLED=true
+    S3_ENABLED: true
 
 ## Contributing
 
